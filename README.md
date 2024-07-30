@@ -70,6 +70,11 @@ VITE_API_KEY = 'your-api-key'
 
 
 
+## Acknowledgements
+
+ - The API is provided by Tmdb.
+ - [Icons8](https://icons8.com/), for the logo.
+
 ## Contributing
 
 Contributions are always welcome!
