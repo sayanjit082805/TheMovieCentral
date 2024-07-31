@@ -1,5 +1,5 @@
 
-# Login
+# TheMovieCentral
 
 TheMoveCentral is a simple web based application which provides various details about thousands of movies in several languages.
 
