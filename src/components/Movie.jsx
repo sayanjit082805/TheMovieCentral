@@ -4,6 +4,7 @@ import "react-toastify/dist/ReactToastify.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import { Watch } from "react-loader-spinner";
 import Header from "./Header";
+import Pill from "./Pill";
 
 const apiKey = import.meta.env.VITE_API_KEY;
 
@@ -14,6 +15,7 @@ function Movie() {
   const [loading, setLoading] = useState(false);
   const [cast, setCast] = useState([]);
   const [director, setDirector] = useState("");
+  const [genre, setGenre] = useState([]);
 
   function timeout(delay) {
     return new Promise((res) => setTimeout(res, delay));
@@ -82,6 +84,7 @@ function Movie() {
       );
       const movie = await response.json();
       setMovie(movie);
+      setGenre(movie.genres.map((genre) => genre.name));
     } catch (error) {
       console.error(error);
     }
@@ -127,7 +130,7 @@ function Movie() {
         {loading ? (
           <div className="relative w-full h-full overflow-hidden flex-grow flex bg-neutral-950 pt-16">
             <div className="absolute inset-0 flex justify-center items-center ">
-              <Watch color="#fff" height={80} width={80} />
+              <Watch color="#f8fafc" height={80} width={80} />
             </div>
           </div>
         ) : (
@@ -148,18 +151,23 @@ function Movie() {
                 <p className="text-lg text-gray-400 max-w-2xl text-center animate-fadeIn">
                   {data?.results[0].overview}
                 </p>
+                <div className="mt-4 flex items-center animate-fadeIn">
+                  {genre.map((genre, index) => (
+                    <Pill key={index} genre={genre} />
+                  ))}
+                </div>
                 <p className="text-md text-slate-500 max-w-2xl text-center mt-4 animate-fadeIn">
                   {director} | {movie?.runtime} minutes |{" "}
                   {movie?.release_date.split("-")[0]}
                 </p>
-                <p className="text-md text-slate-300 max-w-2xl text-center mt-4 animate-fadeIn font-semibold">
+                <p className="text-md text-slate-300 max-w-2xl text-center mt-3.5 animate-fadeIn font-semibold">
                   Starring :{" "}
                   {cast
                     .slice(0, 4)
                     .map((member) => member.name)
                     .join(", ")}
                 </p>
-                <div className="mt-4 flex items-center">
+                <div className="mt-3.5 flex items-center">
                   <i className="fas fa-star text-yellow-400 animate-fadeIn"></i>
                   <span className="text-lg text-white ml-2 mt-0.5 animate-fadeIn">
                     {movie?.vote_average.toFixed(2)} / 10
