@@ -18,6 +18,7 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-loader-spinner": "^6.1.6",
+    "react-lottie": "^1.2.4",
     "react-toastify": "^10.0.5"
   },
   "devDependencies": {

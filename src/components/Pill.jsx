@@ -1,6 +1,6 @@
 function Pill({ genre }) {
   return (
-    <span className="bg-zinc-800 text-slate-50 text-xs font-semibold mr-2 px-3 py-1 rounded-full shadow-md">
+    <span className="bg-slate-200 text-neutral-950 text-xs font-semibold mr-2.5 px-3 py-1 rounded-full shadow-md">
       {genre}
     </span>
   );

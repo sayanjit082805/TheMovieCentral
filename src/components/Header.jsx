@@ -1,12 +1,22 @@
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch, faTimes } from "@fortawesome/free-solid-svg-icons";
-import logo from "/logo.svg";
+import Lottie from "react-lottie";
+import logo from "../assets/logo.json";
 import tmdb from "../assets/tmdb.svg";
 
 function Header({ search, setSearch, handleSearch, handleKeyPress }) {
   const [focused, setFocused] = useState(false);
   const [showCancel, setShowCancel] = useState(false);
+
+  const defaultOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: logo,
+    rendererSettings: {
+      preserveAspectRatio: "xMidYMid slice",
+    },
+  };
 
   const handleSearchClick = () => {
     handleSearch();
@@ -25,7 +35,7 @@ function Header({ search, setSearch, handleSearch, handleKeyPress }) {
         aria-label="Global"
       >
         <div className="flex items-center">
-          <img className="h-9 w-auto" src={logo} alt="movie-icon" />
+          <Lottie options={defaultOptions} height={40} width={40} />
           <h1 className="text-2xl ml-1.5 bg-gradient-to-r from-slate-500 to-slate-100 font-bold text-transparent bg-clip-text font-roboto">
             TheMovieCentral
           </h1>
