@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch, faTimes } from "@fortawesome/free-solid-svg-icons";
 import Lottie from "react-lottie";
@@ -8,6 +8,7 @@ import tmdb from "../assets/tmdb.svg";
 function Header({ search, setSearch, handleSearch, handleKeyPress }) {
   const [focused, setFocused] = useState(false);
   const [showCancel, setShowCancel] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
 
   const defaultOptions = {
     loop: true,
@@ -17,6 +18,25 @@ function Header({ search, setSearch, handleSearch, handleKeyPress }) {
       preserveAspectRatio: "xMidYMid slice",
     },
   };
+
+  useEffect(() => {
+    let lastScrollTop = 0;
+    const handleScroll = () => {
+      const scrollTop =
+        window.pageYOffset || document.documentElement.scrollTop;
+      if (scrollTop > lastScrollTop) {
+        setIsVisible(false);
+      } else {
+        setIsVisible(true);
+      }
+      lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   const handleSearchClick = () => {
     handleSearch();
@@ -29,14 +49,18 @@ function Header({ search, setSearch, handleSearch, handleKeyPress }) {
   };
 
   return (
-    <header className="fixed top-0 left-0 w-full z-10 bg-gradient-to-r from-black via-transparent to-transparent h-16 shadow-lg border-b-2 border-white">
+    <header
+      className={`fixed top-0 left-0 w-full z-50 transition-transform duration-300 ${
+        isVisible ? "transform translate-y-0" : "transform -translate-y-full"
+      } bg-gradient-to-r from-black via-transparent to-transparent h-16 shadow-lg border-b-2 border-white`}
+    >
       <nav
         className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8 h-full"
         aria-label="Global"
       >
         <div className="flex items-center">
           <Lottie options={defaultOptions} height={40} width={40} />
-          <h1 className="text-2xl ml-1.5 bg-gradient-to-r from-slate-500 to-slate-100 font-bold text-transparent bg-clip-text font-roboto">
+          <h1 className="text-2xl ml-1.5 bg-gradient-to-r from-violet-500 to-cyan-600 font-bold text-transparent bg-clip-text font-roboto">
             TheMovieCentral
           </h1>
           <img src={tmdb} alt="tmdb" className="h-6 ml-2" />

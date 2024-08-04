@@ -5,6 +5,7 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 import { Watch } from "react-loader-spinner";
 import Header from "./Header";
 import Pill from "./Pill";
+import Home from "./Home";
 
 const apiKey = import.meta.env.VITE_API_KEY;
 
@@ -16,6 +17,8 @@ function Movie() {
   const [cast, setCast] = useState([]);
   const [director, setDirector] = useState("");
   const [genre, setGenre] = useState([]);
+  const [hasSearched, setHasSearched] = useState(false);
+  const [popular, setPopular] = useState([]);
 
   function timeout(delay) {
     return new Promise((res) => setTimeout(res, delay));
@@ -67,6 +70,7 @@ function Movie() {
         setLoading(false);
         return;
       }
+      setHasSearched(true);
       setData(data);
       if (data.results.length > 0) {
         getMovie(data.results[0].id);
@@ -104,6 +108,18 @@ function Movie() {
     }
   }
 
+  async function getPopular() {
+    try {
+      const response = await fetch(
+        `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}`
+      );
+      const data = await response.json();
+      setPopular(data.results);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   function handleSearch() {
     getData(search);
   }
@@ -115,78 +131,90 @@ function Movie() {
   }
 
   useEffect(() => {
-    getData("Interstellar");
+    getPopular();
   }, []);
 
   return (
     <>
-      <div className="relative w-full h-screen flex flex-col">
-        <Header
-          search={search}
-          setSearch={setSearch}
-          handleSearch={handleSearch}
-          handleKeyPress={handleKeyPress}
-        />
-        {loading ? (
-          <div className="relative w-full h-full overflow-hidden flex-grow flex bg-neutral-950 pt-16">
-            <div className="absolute inset-0 flex justify-center items-center ">
-              <Watch color="#f8fafc" height={80} width={80} />
-            </div>
+      <Header
+        search={search}
+        setSearch={setSearch}
+        handleSearch={handleSearch}
+        handleKeyPress={handleKeyPress}
+      />
+      {!hasSearched ? (
+        loading ? (
+          <div className="relative w-full h-screen flex justify-center items-center bg-neutral-950">
+            <Watch color="#f8fafc" height={80} width={80} />
           </div>
         ) : (
-          <>
-            <div className="relative w-full h-full overflow-hidden flex-grow flex bg-neutral-950 pt-16">
-              <div className="w-1/2 h-full flex flex-col justify-center items-center p-8 bg-gradient-to-l border-r-2 border-white">
-                <img
-                  src={`https://image.tmdb.org/t/p/w780/${data?.results[0].poster_path}`}
-                  alt={`${data?.results[0].title} Poster`}
-                  className="w-[200px] mb-5 rounded-lg shadow-lg h-auto animate-fadeIn"
-                />
-                <h1 className="text-4xl text-slate-50 font-bold mb-1 animate-fadeIn">
-                  {data?.results[0].title}
-                </h1>
-                <p className="text-md text-slate-300 italic max-w-2xl text-center font-medium animate-fadeIn mb-5">
-                  {movie?.tagline}
-                </p>
-                <p className="text-lg text-gray-400 max-w-2xl text-center animate-fadeIn">
-                  {data?.results[0].overview}
-                </p>
-                <div className="mt-4 flex items-center animate-fadeIn">
-                  {genre.map((genre, index) => (
-                    <Pill key={index} genre={genre} />
-                  ))}
-                </div>
-                <p className="text-md text-slate-500 max-w-2xl text-center mt-4 animate-fadeIn">
-                  {director} | {movie?.runtime} minutes |{" "}
-                  {movie?.release_date.split("-")[0]}
-                </p>
-                <p className="text-md text-slate-300 max-w-2xl text-center mt-3.5 animate-fadeIn font-semibold">
-                  Starring :{" "}
-                  {cast
-                    .slice(0, 4)
-                    .map((member) => member.name)
-                    .join(", ")}
-                </p>
-                <div className="mt-3.5 flex items-center">
-                  <i className="fas fa-star text-yellow-400 animate-fadeIn"></i>
-                  <span className="text-lg text-white ml-2 mt-0.5 animate-fadeIn">
-                    {movie?.vote_average.toFixed(2)} / 10
-                  </span>
+          <Home popular={popular} getPopular={getPopular} getData={getData}/>
+        )
+      ) : (
+        <>
+          <div className="relative w-full h-screen flex flex-col">
+            {loading ? (
+              <div className="relative w-full h-full overflow-hidden flex-grow flex bg-neutral-950 pt-16">
+                <div className="absolute inset-0 flex justify-center items-center ">
+                  <Watch color="#f8fafc" height={80} width={80} />
                 </div>
               </div>
-              <div className="w-1/2 h-full relative">
-                <img
-                  src={`https://image.tmdb.org/t/p/original/${data?.results[0].backdrop_path}`}
-                  alt={`${data?.results[0].title} Backdrop`}
-                  className="absolute inset-0 w-full h-full object-cover object-center animate-fadeIn"
-                />
-                <div className="absolute inset-0 bg-gradient-to-r from-black via-transparent to-transparent"></div>
-              </div>
-            </div>
-          </>
-        )}
-      </div>
-      <ToastContainer />
+            ) : (
+              <>
+                <div className="relative w-full h-full overflow-hidden flex-grow flex bg-neutral-950 pt-16">
+                  <div className="w-1/2 h-full flex flex-col justify-center items-center p-8 bg-gradient-to-l border-r-2 border-white">
+                    <img
+                      src={`https://image.tmdb.org/t/p/w780/${data?.results[0].poster_path}`}
+                      alt={`${data?.results[0].title} Poster`}
+                      className="w-[200px] mb-5 rounded-lg shadow-lg h-auto animate-fadeIn transition duration-200 hover:scale-105"
+                    />
+                    <h1 className="text-4xl text-slate-50 font-bold mb-1 animate-fadeIn">
+                      {data?.results[0].title}
+                    </h1>
+                    <p className="text-md text-slate-300 italic max-w-2xl text-center font-medium animate-fadeIn mb-5">
+                      {movie?.tagline}
+                    </p>
+                    <p className="text-lg text-gray-400 max-w-2xl text-center animate-fadeIn">
+                      {data?.results[0].overview}
+                    </p>
+                    <div className="mt-4 flex items-center animate-fadeIn">
+                      {genre.map((genre, index) => (
+                        <Pill key={index} genre={genre} />
+                      ))}
+                    </div>
+                    <p className="text-md text-slate-500 max-w-2xl text-center mt-4 animate-fadeIn">
+                      {director} | {movie?.runtime} minutes |{" "}
+                      {movie?.release_date.split("-")[0]}
+                    </p>
+                    <p className="text-md text-slate-300 max-w-2xl text-center mt-3.5 animate-fadeIn font-semibold">
+                      Starring :{" "}
+                      {cast
+                        .slice(0, 4)
+                        .map((member) => member.name)
+                        .join(", ")}
+                    </p>
+                    <div className="mt-3.5 flex items-center">
+                      <i className="fas fa-star text-yellow-400 animate-fadeIn"></i>
+                      <span className="text-lg text-white ml-2 mt-0.5 animate-fadeIn">
+                        {movie?.vote_average.toFixed(2)} / 10
+                      </span>
+                    </div>
+                  </div>
+                  <div className="w-1/2 h-full relative">
+                    <img
+                      src={`https://image.tmdb.org/t/p/original/${data?.results[0].backdrop_path}`}
+                      alt={`${data?.results[0].title} Backdrop`}
+                      className="absolute inset-0 w-full h-full object-cover object-center animate-fadeIn"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-r from-black via-transparent to-transparent"></div>
+                  </div>
+                </div>
+              </>
+            )}
+          </div>
+          <ToastContainer />
+        </>
+      )}
     </>
   );
 }
