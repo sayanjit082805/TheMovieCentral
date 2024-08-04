@@ -1,4 +1,3 @@
-
 # TheMovieCentral
 
 TheMoveCentral is a simple web based application which provides various details about thousands of movies in several languages.
@@ -21,7 +20,7 @@ TheMoveCentral is a simple web based application which provides various details 
 
 ## Demo
 
-![](https://raw.githubusercontent.com/sayanjit082805/TheMovieCentral/main/demo/demo.gif)
+https://github.com/user-attachments/assets/d784b4e1-8424-4444-ac5d-05c67ebf9304
 
 ## Screenshots
 
