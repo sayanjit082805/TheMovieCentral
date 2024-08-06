@@ -1,4 +1,3 @@
-
 # TheMovieCentral
 
 TheMoveCentral is a simple web based application which provides various details about thousands of movies in several languages.
@@ -11,6 +10,7 @@ TheMoveCentral is a simple web based application which provides various details 
 ## Features
 
 - Search details for an almost endless number of movies.
+- Built (particularly, the landing page) using [Aceternity UI](https://ui.aceternity.com/)
 - Powered by [tmdb](https://themoviedb.org).
 - Toast notifications using [react-toastify](https://fkhadra.github.io/react-toastify/introduction/).
 - Small loading animations using [React Spinners](https://mhnpd.github.io/react-loader-spinner/).
@@ -20,7 +20,7 @@ TheMoveCentral is a simple web based application which provides various details 
 
 ## Demo
 
-![](https://raw.githubusercontent.com/sayanjit082805/TheMovieCentral/main/demo/demo.gif)
+https://github.com/user-attachments/assets/d784b4e1-8424-4444-ac5d-05c67ebf9304
 
 ## Screenshots
 
@@ -74,6 +74,7 @@ VITE_API_KEY = 'your-api-key'
 
  - The API is provided by Tmdb.
  - [Icons8](https://icons8.com/), for the logo.
+ - Aceternity for the awesome lamp and infinite card scroll components.
 
 ## Contributing
 
