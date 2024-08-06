@@ -1,7 +1,7 @@
 "use client";
 
 import { cn } from "../lib/utils";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 
 function Cards({
   items,
@@ -11,8 +11,8 @@ function Cards({
   className,
   getData,
 }) {
-  const containerRef = React.useRef(null);
-  const scrollerRef = React.useRef(null);
+  const containerRef = useRef(null);
+  const scrollerRef = useRef(null);
   const [start, setStart] = useState(false);
 
   useEffect(() => {
@@ -35,6 +35,7 @@ function Cards({
       setStart(true);
     }
   }
+
   const getDirection = () => {
     if (containerRef.current) {
       if (direction === "left") {
@@ -50,6 +51,7 @@ function Cards({
       }
     }
   };
+
   const getSpeed = () => {
     if (containerRef.current) {
       if (speed === "fast") {
@@ -61,26 +63,27 @@ function Cards({
       }
     }
   };
+
   return (
     <div
       ref={containerRef}
       className={cn(
-        "flex min-w-full flex-nowrap scroller relative z-20  max-w-7xl overflow-x-auto  [mask-image:linear-gradient(to_right,transparent,white_20%,white_80%,transparent)]",
+        "flex min-w-full flex-nowrap scroller relative z-20 max-w-7xl overflow-x-auto [mask-image:linear-gradient(to_right,transparent,white_20%,white_80%,transparent)]",
         className
       )}
     >
       <ul
         ref={scrollerRef}
         className={cn(
-          " flex min-w-full shrink-0 gap-5 py-4 w-max flex-nowrap",
-          start && "animate-scroll ",
+          "flex min-w-full shrink-0 gap-5 py-4 w-max flex-nowrap",
+          start && "animate-scroll",
           pauseOnHover && "hover:[animation-play-state:paused]"
         )}
       >
-        {items.map((item) => (
+        {items.concat(items).map((item, index) => (
           <li
             className="w-[350px] max-w-full relative rounded-2xl border border-b-0 flex-shrink-0 border-slate-700 md:w-[450px] hover:scale-105 transition-transform duration-200"
-            key={item.id}
+            key={`${item.id}-${index}`}
           >
             <div
               className="h-56 rounded-t-2xl"
