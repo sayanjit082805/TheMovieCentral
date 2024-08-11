@@ -6,7 +6,7 @@ import TypewriterEffectSmooth from "./TypeWriter";
 import words from "../lib/text";
 import Cards from "./Cards";
 
-export default function Home({ popular, getData }) {
+export default function Home({ popular, getData, topRated }) {
   const movies = popular.map((item) => ({
     overview: item.overview,
     title: item.title,
@@ -14,6 +14,17 @@ export default function Home({ popular, getData }) {
     backdrop: item.backdrop_path,
     id: item.id,
     poster: item.poster_path,
+    rating: item.vote_average.toFixed(2),
+  }));
+
+  const topRatedMovies = topRated.map((item) => ({
+    overview: item.overview,
+    title: item.title,
+    release: item.release_date,
+    backdrop: item.backdrop_path,
+    id: item.id,
+    poster: item.poster_path,
+    rating: item.vote_average.toFixed(2),
   }));
 
   return (
@@ -46,10 +57,21 @@ export default function Home({ popular, getData }) {
         <h2 className="text-slate-300 flex justify-center items-center font-semibold text-4xl">
           In the meantime, here's what we've been watching
         </h2>
-        <div className="mt-8 bg-neutral-950 mb-10">
+        <div className="mt-8 bg-neutral-950 mb-20">
           <Cards
             items={movies}
             direction="left"
+            speed="normal"
+            getData={getData}
+          />
+        </div>
+        <h2 className="text-slate-300 flex justify-center items-center font-semibold text-4xl">
+          Top Rated
+        </h2>
+        <div className="mt-8 bg-neutral-950 mb-20">
+          <Cards
+            items={topRatedMovies}
+            direction="right"
             speed="normal"
             getData={getData}
           />
