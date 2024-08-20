@@ -20,7 +20,11 @@ TheMoveCentral is a simple web based application which provides various details 
 
 ## Demo
 
-https://github.com/user-attachments/assets/d784b4e1-8424-4444-ac5d-05c67ebf9304
+
+
+https://github.com/user-attachments/assets/67632fa7-d223-4af9-ba64-041c68e82b26
+
+
 
 ## Screenshots
 
