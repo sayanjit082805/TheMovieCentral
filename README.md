@@ -32,13 +32,13 @@ https://github.com/user-attachments/assets/2fffe7d3-04cb-4e1a-879a-e5ccf898519a
 
 ## Screenshots
 
-![](https://raw.githubusercontent.com/sayanjit082805/TheMovieCentral/main/demo/ss1.png)
+![](https://raw.githubusercontent.com/sayanjit082805/TheMovieCentral/main/demo/ss-1.png)
 
 
-![](https://raw.githubusercontent.com/sayanjit082805/TheMovieCentral/main/demo/ss2.png)
+![](https://raw.githubusercontent.com/sayanjit082805/TheMovieCentral/main/demo/ss-2.png)
 
 
-![](https://raw.githubusercontent.com/sayanjit082805/TheMovieCentral/main/demo/ss3.png)
+![](https://raw.githubusercontent.com/sayanjit082805/TheMovieCentral/main/demo/ss-3.png)
 
 
 ## Prerequisites
