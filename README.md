@@ -26,15 +26,12 @@ https://github.com/user-attachments/assets/d784b4e1-8424-4444-ac5d-05c67ebf9304
 
 ![](https://raw.githubusercontent.com/sayanjit082805/TheMovieCentral/main/demo/ss1.png)
 
-* Movie details
 
 ![](https://raw.githubusercontent.com/sayanjit082805/TheMovieCentral/main/demo/ss2.png)
 
-* Another movie (Insert _I am vengeance_ memes here!)
 
 ![](https://raw.githubusercontent.com/sayanjit082805/TheMovieCentral/main/demo/ss3.png)
 
-* Error notifications
 
 ## Prerequisites
 
