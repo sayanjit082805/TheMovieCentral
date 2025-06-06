@@ -20,13 +20,13 @@ https://github.com/user-attachments/assets/2fffe7d3-04cb-4e1a-879a-e5ccf898519a
 
 ## Screenshots
 
-![](https://raw.githubusercontent.com/sayanjit082805/TheMovieCentral/main/demo/ss-1.png)
+![](https://raw.githubusercontent.com/sayanjit082805/TheMovieCentral/main/demo/ss1.png)
 
-![](https://raw.githubusercontent.com/sayanjit082805/TheMovieCentral/main/demo/ss-2.png)
+![](https://raw.githubusercontent.com/sayanjit082805/TheMovieCentral/main/demo/ss2.png)
 
-![](https://raw.githubusercontent.com/sayanjit082805/TheMovieCentral/main/demo/ss-3.png)
+![](https://raw.githubusercontent.com/sayanjit082805/TheMovieCentral/main/demo/ss3.png)
 
-![](https://raw.githubusercontent.com/sayanjit082805/TheMovieCentral/main/demo/ss-4.png)
+![](https://raw.githubusercontent.com/sayanjit082805/TheMovieCentral/main/demo/ss4.png)
 
 ## Prerequisites
 
@@ -43,7 +43,7 @@ First, head over to [tmdb](https://www.themoviedb.org/) and generate your own AP
 - Clone the repository.
 
 ```bash
-git clone https://github.com/sayanjit082805/AtmosAlert.git
+git clone https://github.com/sayanjit082805/TheMovieCentral.git
 cd TheMovieCentral
 ```
 
@@ -58,7 +58,7 @@ NEXT_PUBLIC_TMDB_API_KEY = 'your-api-key'
 ### Running
 
 - Start the application with `npm run dev`.
-- Next, open your browser and navigate to `http://localhost:5173` or the port as specified by vite.
+- Next, open your browser and navigate to `http://localhost:3000`.
 
 ## Acknowledgements
 
