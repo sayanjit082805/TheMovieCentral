@@ -2,9 +2,10 @@
 
 TheMoveCentral is a web based application which provides various details about thousands of movies, built using NextJS.
 
-![Next JS](https://img.shields.io/badge/Next-black?style=for-the-badge&logo=next.js&logoColor=white)
+![Next](https://img.shields.io/badge/Next-black?style=for-the-badge&logo=next.js&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
 ![TailwindCSS](https://img.shields.io/badge/Tailwind-CBD5E1.svg?style=for-the-badge&logo=tailwind-css&logoColor=38bdf8)
+![Motion](https://img.shields.io/badge/Framer-black?style=for-the-badge&logo=framer&logoColor=blue)
 
 ## Features
 
@@ -16,7 +17,7 @@ TheMoveCentral is a web based application which provides various details about t
 
 ## Demo
 
-https://github.com/user-attachments/assets/2fffe7d3-04cb-4e1a-879a-e5ccf898519a
+
 
 ## Screenshots
 
