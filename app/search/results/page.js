@@ -45,8 +45,8 @@ export default function SearchResults() {
               ) : (
                 <>
                   <p className="text-lg mb-2 font-mono">
-                    Showing matches for{" "}
-                    <span className="font-mono">"{query}"</span>
+                    Showing matches for{" "};
+                    <span className="font-mono">&quot;{query}&quot;</span>
                   </p>
                 </>
               )}

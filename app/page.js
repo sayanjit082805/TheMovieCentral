@@ -123,7 +123,7 @@ export default function Home() {
           ~/TheMovieCentral
         </h1>
         <p className="mt-6 text-xl md:text-[1.8rem] text-center font-sans antialiased ml-2">
-          "Cinema is a matter of what's in the frame and what's out of it."
+          &quot;Cinema is a matter of what&apos;s in the frame and what&apos;s out of it.&quot;
           <br />
           <span className="font-sans text-[#3f51b5] text-xl md:text-[1.65rem]">
             {" "}
@@ -167,7 +167,7 @@ export default function Home() {
           transition={{ duration: 0.5, ease: "easeInOut" }}
           className="text-gray-600 mb-8 mt-2 font-mono font-medium"
         >
-          What we've been watching
+          What we&apos;ve been watching
         </motion.p>
         {loading ? <Home_Skeleton /> : <Card movies={movies_popular} />}
       </section>
@@ -204,7 +204,7 @@ export default function Home() {
           transition={{ duration: 0.5, ease: "easeInOut" }}
           className="text-gray-600 mb-8 mt-2 font-mono font-medium"
         >
-          'I'm the king of the world!' - Jack Dawson, Titanic
+          &quot;I&apos;m the king of the world!&apos; - Jack Dawson, Titanic
         </motion.p>
         {loading ? <Home_Skeleton /> : <Card movies={movies_topRated} />}
       </section>
@@ -241,7 +241,7 @@ export default function Home() {
           transition={{ duration: 0.5, ease: "easeInOut" }}
           className="text-gray-600 mb-8 mt-2 font-mono font-medium"
         >
-          'You hold onto the past, but jazz is about the future.' - Keith, La La
+          &quot;You hold onto the past, but jazz is about the future.&quot; - Keith, La La
           Land
         </motion.p>
         {loading ? <Home_Skeleton /> : <Card movies={movies_upcoming} />}
