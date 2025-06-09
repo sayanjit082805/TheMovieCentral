@@ -119,7 +119,7 @@ export default function Home() {
         }}
         transition={{ duration: 0.3, ease: "easeInOut" }}
       >
-        <h1 className="text-4xl md:text-6xl font-bold text-center font-mono antialiased">
+        <h1 className="text-4xl md:text-6xl font-bold text-center font-mono antialiased px-3 md:px-0">
           ~/TheMovieCentral
         </h1>
         <p className="mt-6 text-xl md:text-[1.8rem] text-center font-sans antialiased ml-2">
