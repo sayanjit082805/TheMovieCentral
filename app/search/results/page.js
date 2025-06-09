@@ -1,12 +1,11 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { Nav } from "@/components/navbar";
 import MovieCard from "@/components/ui/results";
 import { Skeleton } from "@/components/ui/skeleton";
-const API_KEY = process.env.NEXT_PUBLIC_TMDB_API_KEY;
 
-export default function SearchResults() {
+const Results = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -17,10 +16,11 @@ export default function SearchResults() {
     setLoading(true);
     try {
       const response = await fetch(
-        `https://api.themoviedb.org/3/search/movie?query=${name}&api_key=${API_KEY}`
+       `/api/results?query=${name}`
       );
       const data = await response.json();
-      setData(data.results.slice(0, 10));
+      console.log(data)
+      setData(data.results.results.slice(0, 10));
       setLoading(false);
     } catch (error) {
       console.error(error);
@@ -45,8 +45,8 @@ export default function SearchResults() {
               ) : (
                 <>
                   <p className="text-lg mb-2 font-mono">
-                    Showing matches for{" "};
-                    <span className="font-mono">&quot;{query}&quot;</span>
+                    Showing matches for : 
+                    <span className="font-mono"> &quot;{query}&quot;</span>
                   </p>
                 </>
               )}
@@ -64,5 +64,13 @@ export default function SearchResults() {
         </main>
       </div>
     </>
+  );
+};
+
+export default function SearchResults() {
+  return (
+    <Suspense>
+      <Results />
+    </Suspense>
   );
 }
