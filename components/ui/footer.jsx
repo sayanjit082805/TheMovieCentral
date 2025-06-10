@@ -206,7 +206,7 @@ export default function Footer() {
             </div>
           </div>
           <div className="flex space-x-6 text-sm">
-            <div className="inline-flex items-center gap-2 px-3 py-1 bg-neutral-200 text-sm rounded-md border border-neutral-200 shadow-sm">
+            <div className="inline-flex items-center gap-2 px-3 py-1 bg-neutral-200 md:text-sm text-xs rounded-md border border-neutral-200 shadow-sm">
               <div className={`w-3 h-3 ${color} rounded-full`}></div>
               <span className="font-medium font-mono">{apiStatus}</span>
             </div>
