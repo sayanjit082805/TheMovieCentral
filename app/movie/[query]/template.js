@@ -2,7 +2,7 @@
 import React from "react";
 import { Nav } from "@/components/navbar";
 import { useRouter } from "next/navigation";
-import { AnimatePresence, motion } from "motion/react";
+import { motion } from "motion/react";
 
 export default function Template({ children }) {
   const router = useRouter();

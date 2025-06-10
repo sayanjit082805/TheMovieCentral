@@ -2,6 +2,7 @@
 import { use, useState, useEffect } from "react";
 import { Star, Clock, Calendar } from "lucide-react";
 import Card from "@/components/ui/card";
+import Footer from "@/components/ui/footer";
 import { motion } from "motion/react";
 import Poster from "@/components/ui/poster";
 import { Loading } from "@/components/ui/skeleton";
@@ -336,6 +337,7 @@ export default function Search({ params }) {
               </div>
               <Card movies={movies_similar} />
             </section>
+            <Footer />
           </>
         )}
       </div>

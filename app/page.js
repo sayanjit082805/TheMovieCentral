@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import Card from "@/components/ui/card";
 import { Nav } from "@/components/navbar";
 import { Home_Skeleton } from "@/components/ui/skeleton";
+import Footer from "@/components/ui/footer";
 import { motion } from "motion/react";
 
 export default function Home() {
@@ -119,13 +120,14 @@ export default function Home() {
         }}
         transition={{ duration: 0.3, ease: "easeInOut" }}
       >
-        <h1 className="text-4xl md:text-6xl font-bold text-center font-mono antialiased px-3 md:px-0">
+        <h1 className="text-[1.9rem] md:text-6xl font-bold text-center font-mono antialiased">
           ~/TheMovieCentral
         </h1>
-        <p className="mt-6 text-xl md:text-[1.8rem] text-center font-sans antialiased ml-2">
-          &quot;Cinema is a matter of what&apos;s in the frame and what&apos;s out of it.&quot;
+        <p className="mt-3 md:mt-6 text-lg md:text-[1.8rem] text-center font-sans antialiased ml-2">
+          &quot;Cinema is a matter of what&apos;s in the frame and what&apos;s
+          out of it.&quot;
           <br />
-          <span className="font-sans text-[#3f51b5] text-xl md:text-[1.65rem]">
+          <span className="font-sans text-[#3f51b5] text-lg md:text-[1.65rem]">
             {" "}
             - Martin Scorsese
           </span>
@@ -134,7 +136,10 @@ export default function Home() {
           Crime, Drama, Sci-Fi, we got it all!
         </p>
       </motion.div>
-      <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 mb-10">
+      <section
+        className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 mb-10"
+        id="popular"
+      >
         <motion.h2
           initial={{ opacity: 0, filter: "blur(10px)" }}
           whileInView={{
@@ -171,7 +176,10 @@ export default function Home() {
         </motion.p>
         {loading ? <Home_Skeleton /> : <Card movies={movies_popular} />}
       </section>
-      <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
+      <section
+        className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16"
+        id="top-rated"
+      >
         <motion.h2
           initial={{ opacity: 0, filter: "blur(10px)" }}
           whileInView={{
@@ -208,7 +216,10 @@ export default function Home() {
         </motion.p>
         {loading ? <Home_Skeleton /> : <Card movies={movies_topRated} />}
       </section>
-      <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
+      <section
+        className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16"
+        id="upcoming"
+      >
         <motion.h2
           initial={{ opacity: 0, filter: "blur(10px)" }}
           whileInView={{
@@ -241,11 +252,12 @@ export default function Home() {
           transition={{ duration: 0.5, ease: "easeInOut" }}
           className="text-gray-600 mb-8 mt-2 font-mono font-medium"
         >
-          &quot;You hold onto the past, but jazz is about the future.&quot; - Keith, La La
-          Land
+          &quot;You hold onto the past, but jazz is about the future.&quot; -
+          Keith, La La Land
         </motion.p>
         {loading ? <Home_Skeleton /> : <Card movies={movies_upcoming} />}
       </section>
+      <Footer />
     </>
   );
 }

@@ -2,6 +2,7 @@
 import { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { Nav } from "@/components/navbar";
+import Footer from "@/components/ui/footer";
 import MovieCard from "@/components/ui/results";
 import { Skeleton } from "@/components/ui/skeleton";
 
@@ -15,11 +16,9 @@ const Results = () => {
   async function getData(name) {
     setLoading(true);
     try {
-      const response = await fetch(
-       `/api/results?query=${name}`
-      );
+      const response = await fetch(`/api/results?query=${name}`);
       const data = await response.json();
-      console.log(data)
+      console.log(data);
       setData(data.results.results.slice(0, 10));
       setLoading(false);
     } catch (error) {
@@ -45,7 +44,7 @@ const Results = () => {
               ) : (
                 <>
                   <p className="text-lg mb-2 font-mono">
-                    Showing matches for : 
+                    Showing matches for :
                     <span className="font-mono"> &quot;{query}&quot;</span>
                   </p>
                 </>
@@ -62,6 +61,7 @@ const Results = () => {
             </div>
           </div>
         </main>
+        <Footer />
       </div>
     </>
   );

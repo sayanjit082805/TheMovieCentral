@@ -5,6 +5,7 @@ import { useState } from "react";
 import { placeholders } from "@/lib/placeholders";
 import { useRouter } from "next/navigation";
 import { Nav } from "@/components/navbar";
+import Footer from "@/components/ui/footer";
 
 export default function Search() {
   const router = useRouter();
@@ -30,6 +31,7 @@ export default function Search() {
           onSubmit={handleSearch}
         />
       </div>
+      <Footer />
     </>
   );
 }
