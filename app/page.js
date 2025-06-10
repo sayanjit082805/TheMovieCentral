@@ -123,11 +123,11 @@ export default function Home() {
         <h1 className="text-[1.9rem] md:text-6xl font-bold text-center font-mono antialiased">
           ~/TheMovieCentral
         </h1>
-        <p className="mt-3 md:mt-6 text-lg md:text-[1.8rem] text-center font-sans antialiased ml-2">
+        <p className="mt-3 md:mt-6 text-md md:text-[1.8rem] text-center font-sans antialiased ml-2">
           &quot;Cinema is a matter of what&apos;s in the frame and what&apos;s
           out of it.&quot;
           <br />
-          <span className="font-sans text-[#3f51b5] text-lg md:text-[1.65rem]">
+          <span className="font-sans text-[#3f51b5] text-md md:text-[1.65rem]">
             {" "}
             - Martin Scorsese
           </span>
