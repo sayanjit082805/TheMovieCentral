@@ -132,7 +132,7 @@ export default function Home() {
             - Martin Scorsese
           </span>
         </p>
-        <p className="mt-3 text-md md:text-xl text-center antialiased font-mono ml-2 md:ml-0">
+        <p className="mt-3 text-sm md:text-xl text-center antialiased font-mono ml-2 md:ml-0">
           Crime, Drama, Sci-Fi, we got it all!
         </p>
       </motion.div>
