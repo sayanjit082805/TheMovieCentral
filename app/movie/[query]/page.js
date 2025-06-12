@@ -1,11 +1,12 @@
 "use client";
 import { use, useState, useEffect } from "react";
-import { Star, Clock, Calendar } from "lucide-react";
+import { Star, Clock, Calendar, MessageSquare } from "lucide-react";
 import Card from "@/components/ui/card";
 import Footer from "@/components/ui/footer";
 import { motion } from "motion/react";
 import Poster from "@/components/ui/poster";
 import { Loading } from "@/components/ui/skeleton";
+import Review from "@/components/ui/review";
 
 export default function Search({ params }) {
   const query = use(params);
@@ -18,7 +19,9 @@ export default function Search({ params }) {
   const [director, setDirector] = useState("");
   const [writer, setWriter] = useState("");
   const [images, setImages] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [reviews, setReviews] = useState([]);
+  const [error, setError] = useState(true);
+  const [loading, setLoading] = useState(true);
 
   async function getMovie(movieId) {
     try {
@@ -89,6 +92,24 @@ export default function Search({ params }) {
     }
   }
 
+  async function getReviews(movieId) {
+    try {
+      const response = await fetch(`/api/reviews?id=${movieId}`);
+      const data = await response.json();
+      if (data.reviews.results && data.reviews.results.length > 0) {
+        setReviews(data.reviews.results.slice(0, 5));
+        setError(false);
+      } else {
+        setReviews([]);
+        setError(true);
+      }
+    } catch (error) {
+      setReviews([]);
+      setError(true);
+      console.error(error);
+    }
+  }
+
   useEffect(() => {
     async function fetchAll() {
       setLoading(true);
@@ -99,6 +120,7 @@ export default function Search({ params }) {
           getImages(id),
           getSimilarMovies(id),
           getSimilarGenre(),
+          getReviews(id),
         ]);
       } catch (error) {
         console.error(error);
@@ -148,7 +170,7 @@ export default function Search({ params }) {
                         {movie?.title}
                       </motion.h1>
                       <motion.p
-                        className="text-primary font-light text-xl md:text-2xl font-sans"
+                        className="font-light text-xl md:text-2xl font-sans"
                         initial={{ opacity: 0, y: 10, filter: "blur(10px)" }}
                         animate={{
                           opacity: 1,
@@ -173,10 +195,7 @@ export default function Search({ params }) {
 
                     <div className="flex items-center space-x-4 text-sm">
                       <div className="flex items-center">
-                        <Star
-                          className="fill-primary text-primary mr-1"
-                          size={16}
-                        />
+                        <Star className="mr-1" size={16} />
                         <span>{movie?.vote_average.toFixed(2)}</span>
                       </div>
                       <div className="flex items-center">
@@ -303,6 +322,42 @@ export default function Search({ params }) {
                   </div>
                 </div>
               </div>
+            </section>
+            <section className="container mx-auto px-4 py-12 border-t border-neutral-300">
+              <div className="mb-8">
+                <h2 className="text-3xl font-bold font-mono">Reviews</h2>
+              </div>
+              {error ? (
+                <div className="p-8 rounded-sm">
+                  <div className="flex justify-center mb-4">
+                    <div className="w-16 h-16 bg-[#f3f3ee] rounded-full flex items-center justify-center">
+                      <MessageSquare className="w-8 h-8 text-neutral-900" />
+                    </div>
+                  </div>
+
+                  <div className="text-center mb-6">
+                    <h3 className="font-medium font-mono text-lg mb-2">
+                      No reviews yet
+                    </h3>
+                  </div>
+                </div>
+              ) : (
+                <div className="space-y-6">
+                  {reviews.map((review, i) => (
+                    <Review review={review} index={i} key={i} />
+                  ))}
+                  <p className="text-md font-mono font-medium hover:underline">
+                    More reviews at{" "}
+                    <a
+                      href={`https://www.themoviedb.org/movie/${id}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      TMDB
+                    </a>
+                  </p>
+                </div>
+              )}
             </section>
             <section className="container mx-auto px-4 py-12 border-t border-neutral-300">
               <div className="flex items-center mb-8">
