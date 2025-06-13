@@ -10,7 +10,7 @@ const getRatingColor = (rating) => {
   return "text-red-500";
 };
 
-const renderStarRating = (rating) => {
+const renderStarRating = (rating, width, height, width2, height2) => {
   const fullStars = Math.floor(rating / 2);
   const halfStar = rating % 2 >= 1 ? 1 : 0;
   const emptyStars = 5 - fullStars - halfStar;
@@ -20,27 +20,37 @@ const renderStarRating = (rating) => {
       {[...Array(fullStars)].map((_, i) => (
         <Star
           key={`full-${i}`}
-          className={`w-4 h-4 fill-current ${getRatingColor(rating)}`}
+          className={`${width} ${height} md:${width2} md:${height2} fill-current ${getRatingColor(
+            rating
+          )}`}
         />
       ))}
       {halfStar === 1 && (
         <div className="relative">
-          <Star className={`w-4 h-4 ${getRatingColor(rating)}`} />
+          <Star
+            className={`${width} ${height} md:${width2} md:${height2} ${getRatingColor(
+              rating
+            )}`}
+          />
           <div className="absolute top-0 left-0 w-1/2 overflow-hidden">
             <Star
-              className={`w-4 h-4 fill-current ${getRatingColor(rating)}`}
+              className={`${width} ${height} md:${width2} md:${height2} fill-current ${getRatingColor(
+                rating
+              )}`}
             />
           </div>
         </div>
       )}
       {[...Array(emptyStars)].map((_, i) => (
-        <Star key={`empty-${i}`} className="w-4 h-4 text-gray-300" />
+        <Star
+          key={`empty-${i}`}
+          className={`${width} ${height} md:${width2} md:${height2} h-4 text-gray-300`}
+        />
       ))}
     </div>
   );
 };
-
-export default function Review({ review, index }) {
+const Review = ({ review, index }) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   const charLimit = 1000;
@@ -51,14 +61,19 @@ export default function Review({ review, index }) {
     setIsExpanded(!isExpanded);
   };
 
-
   return (
     <div key={index} className="p-4 rounded-sm border border-neutral-300">
       <div className="flex justify-between items-start mb-3">
         <div>
           <h3 className="font-medium font-mono">{review.author}</h3>
           <div className="flex items-center mt-1">
-            {renderStarRating(review.author_details.rating)}
+            {renderStarRating(
+              review.author_details.rating,
+              "w-4",
+              "h-4",
+              "w-4",
+              "h-4"
+            )}
             <span className="ml-2 text-sm font-mono font-medium">
               {new Date(review.updated_at).toLocaleString("en-us", {
                 year: "numeric",
@@ -106,4 +121,40 @@ export default function Review({ review, index }) {
       )}
     </div>
   );
-}
+};
+
+const Summary = ({ rating, votes, popularity }) => {
+  return (
+    <div className="rounded-md p-6 border border-neutral-300">
+      <div className="flex items-center justify-between">
+        <div className="flex items-center space-x-4">
+          <div
+            className={`text-3xl md:text-4xl font-bold font-sans ${getRatingColor(
+              rating
+            )}`}
+          >
+            {rating.toFixed(2)}
+          </div>
+          <div>
+            <div className="flex items-center space-x-1 mb-1">
+              {renderStarRating(rating, "w-4", "h-4", "w-5", "h-5")}
+            </div>
+            <div className="text-xs md:text-sm font-mono text-gray-400 font-medium">
+              Based on {votes} votes
+            </div>
+          </div>
+        </div>
+        <div className="text-right">
+          <div className="text-green-400 text-md md:text-2xl font-bold font-sans">
+            {popularity.toFixed(2)}
+          </div>
+          <div className="text-gray-400 text-xs md:text-sm font-sans font-medium">
+            Popularity Score
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export { Review, Summary };

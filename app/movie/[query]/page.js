@@ -6,7 +6,7 @@ import Footer from "@/components/ui/footer";
 import { motion } from "motion/react";
 import Poster from "@/components/ui/poster";
 import { Loading } from "@/components/ui/skeleton";
-import Review from "@/components/ui/review";
+import { Review, Summary } from "@/components/ui/review";
 
 export default function Search({ params }) {
   const query = use(params);
@@ -222,9 +222,18 @@ export default function Search({ params }) {
                     </motion.p>
                   </div>
                   <div className="md:w-2/5 relative">
-                    <div className="relative rounded-lg overflow-hidden shadow-2xl transform transition-transform hover:scale-105 duration-500">
+                    <motion.div
+                      initial={{ opacity: 0, y: 10, filter: "blur(10px)" }}
+                      whileInView={{
+                        opacity: 1,
+                        y: 0,
+                        filter: "blur(0px)",
+                      }}
+                      transition={{ duration: 0.3, ease: "easeInOut" }}
+                      className="relative rounded-lg overflow-hidden shadow-2xl transform transition-transform hover:scale-105 duration-500"
+                    >
                       <Poster poster_path={movie?.poster_path} />
-                    </div>
+                    </motion.div>
                   </div>
                 </div>
               </div>
@@ -343,6 +352,11 @@ export default function Search({ params }) {
                 </div>
               ) : (
                 <div className="space-y-6">
+                  <Summary
+                    rating={movie?.vote_average}
+                    votes={movie?.vote_count}
+                    popularity={movie?.popularity}
+                  />
                   {reviews.map((review, i) => (
                     <Review review={review} index={i} key={i} />
                   ))}
